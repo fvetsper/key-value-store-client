@@ -1,10 +1,10 @@
 package home.client;
 
-import java.util.Arrays;
-
 import home.commons.Action;
 import home.commons.Request;
 import home.commons.Response;
+
+import java.util.Arrays;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -12,7 +12,6 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
 
 public class KeyValuesClient {
 	
@@ -24,7 +23,7 @@ public class KeyValuesClient {
 				Option.builder("gak")
 				.longOpt("get-all-keys")
                 .desc( "returns all keys matching pattern." )
-                .hasArg()
+                .numberOfArgs(1)
                 .argName("pattern")
                 .build());
 		options.addOption(
@@ -52,7 +51,7 @@ public class KeyValuesClient {
 				Option.builder("g")
                  .longOpt("get")
 				.desc( "gets a list by its key K." )
-                .hasArg()
+                .numberOfArgs(1)
                 .argName("K")
                 .build());
 	}
@@ -81,7 +80,7 @@ public class KeyValuesClient {
 					response.printKeysOnly();
 				}
 			}
-			if (cmd.hasOption("ra")) {
+			else if (cmd.hasOption("ra")) {
 				String[] optionValues = cmd.getOptionValues("ra");
 				
 				if (optionValues.length != 2) {
@@ -104,7 +103,7 @@ public class KeyValuesClient {
 				}
 				
 			}
-			if (cmd.hasOption("la")) {
+			else if (cmd.hasOption("la")) {
 				String[] optionValues = cmd.getOptionValues("la");
 				
 				if (optionValues.length != 2) {
@@ -126,7 +125,7 @@ public class KeyValuesClient {
 					response.printAll();
 				}
 			}
-			if (cmd.hasOption('s')) {
+			else if (cmd.hasOption('s')) {
 				String[] optionValues = cmd.getOptionValues('s');
 				
 				if (optionValues.length < 2) {
@@ -148,7 +147,7 @@ public class KeyValuesClient {
 					response.printAll();
 				}
 			}
-			if (cmd.hasOption('g')) {
+			else if (cmd.hasOption('g')) {
 				String optionValue = cmd.getOptionValue('g');
 				
 				String host = cmd.getArgs()[0];
@@ -163,9 +162,11 @@ public class KeyValuesClient {
 				if (response != null) {
 					response.printAll();
 				}
+			} else {
+				usage();
 			}
 			
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			usage();
 		}
 	}
