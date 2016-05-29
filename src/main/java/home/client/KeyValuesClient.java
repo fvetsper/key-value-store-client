@@ -174,7 +174,8 @@ public class KeyValuesClient {
 
 	private static void usage() {
 		HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp("keyValuesClient [host] [port] [action] [params]", options );
+		formatter.setWidth(200);
+		formatter.printHelp("java -jar client-jar-with-dependencies.jar <host> <port> <action> <params>", options );
 	}
 	
 	
