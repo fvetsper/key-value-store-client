@@ -23,3 +23,17 @@ to get a list for key 123 :
 ```sh
 java -jar client-jar-with-dependencies.jar localhost 1234 -g 123
 ```
+
+to set a list val1, val2 by key 123 :
+
+```sh
+java -jar client-jar-with-dependencies.jar localhost 1234 -s 123 val1 val2
+```
+
+to adds a value val3 to key 123, from the left :
+
+```sh
+java -jar client-jar-with-dependencies.jar localhost 1234 -la 123 val3
+```
+
+
