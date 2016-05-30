@@ -24,11 +24,10 @@ public class KeyValuesClientConnection {
 
 	public Response send(Request request) {
 		Response response = null;
-		try {
-			Socket socket = new Socket(host, port);
+		try (Socket socket = new Socket(host, port);
 			DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-			DataInputStream dis = new DataInputStream(socket.getInputStream());
-
+			DataInputStream dis = new DataInputStream(socket.getInputStream())) {
+			
 			ObjectMapper mapper = new ObjectMapper();
 			String rjson = mapper.writeValueAsString(request);
 			
@@ -40,11 +39,6 @@ public class KeyValuesClientConnection {
 			if (wjson != null && wjson.length() > 0) {
 				response = mapper.readValue(wjson, Response.class);
 			}
-			
-			dis.close();
-			dos.close();
-			socket.close();
-			
 		} catch (UnknownHostException e) {
 			System.err.println("Don't know about host " + host);
 		} catch (IOException e) {
