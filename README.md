@@ -36,4 +36,8 @@ to adds a value val3 to key 123, from the left :
 java -jar client-jar-with-dependencies.jar localhost 1234 -la 123 val3
 ```
 
+### Implementation
+
+* using apache commons cli to parse command line options
+* connecting to server by java socket using json to send and get data
 
